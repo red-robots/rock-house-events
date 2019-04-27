@@ -1,4 +1,6 @@
 <?php  
+$home_page_id = get_home_page_id();
+$featured_event = get_field('featured_event',$home_page_id);
 $max_post = 6;
 $args = array(
 	'posts_per_page'   => $max_post,
@@ -14,6 +16,10 @@ $args = array(
         ),
     )
 );
+if($featured_event) {
+	$featured_event_id = $featured_event->ID;
+	$args['post__not_in'] = array($featured_event_id);
+}
 $events = new WP_Query($args);
 if ( $events->have_posts() ) {  ?>
 <div class="upcoming-events-list">
