@@ -407,3 +407,7 @@ function get_instagram_setup() {
     }
     return $option;
 }
+
+function get_home_page_id() {
+    return 2; /* Homepage ID */
+}

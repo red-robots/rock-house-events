@@ -77,6 +77,8 @@ function bellaworks_setup() {
     'flex-width'  => true,
     'flex-height' => true,
   ) );
+
+  add_image_size( 'small-thumbnail', 50, 50, true );
 }
 endif;
 add_action( 'after_setup_theme', 'bellaworks_setup' );

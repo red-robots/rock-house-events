@@ -11,22 +11,64 @@
  *
  * @package bellaworks
  */
-
+$home_page_id = get_home_page_id();
 get_header(); ?>
+<div id="primary" class="full-content-area clear">
+	<?php $post = get_post($home_page_id);
+	if ( $post ) {  setup_postdata($post); ?>
+		
+		<div class="black-navigation clear">
+			<div class="wrapper clear">
+				<div class="flexrow clear">
+					<div class="text-left flexcol"><span aria-label="true" class="eventSectionTitle">Featured Event</span></div>
+					<div class="text-right flexcol"><span aria-label="true" class="eventSectionTitle">Upcoming Events</span></div>
+				</div>
+			</div>
+		</div>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+	<?php } ?>
 
-		<?php
-			/* Start the Loop */
-			$wp_query = new WP_Query(array('post_status'=>'private','pagename'=>'homepage'));
-			if ( have_posts() ) : the_post(); 
-				get_template_part( 'template-parts/content', 'index' );
-			endif; ?>
+	<?php  
+		$featured_event = get_field('featured_event',$home_page_id);
+		$button_name = get_field('button_name',$home_page_id);
+		$button_link = get_field('button_link',$home_page_id);
+	?>
+	<div class="content-wrap-events clear">
+		<div class="flexrow clear">
+			<div class="flexcol featured-event js-blocks">
+				<div class="blackdiv"><span aria-label="true" class="eventSectionTitle">Featured Event</span></div>
+				<?php if ($featured_event) { 
+					$pid = $featured_event->ID;
+					$pagelink = get_permalink($pid);
+					$thumb_id = get_post_thumbnail_id($pid);
+					$featImg = wp_get_attachment_image_src($thumb_id,'large');
+					if($featImg) { ?>
+					<a class="imagewrap" href="<?php echo $pagelink ?>"><img src="<?php echo $featImg[0] ?>" alt="<?php echo $featured_event->post_title; ?>"></a>
+					<?php } ?>
+				<?php } ?>
+			</div>
+			<div class="flexcol upcoming-events js-blocks">
+				<div class="blackdiv"><span aria-label="true" class="eventSectionTitle">Upcoming Events</span></div>
+				<?php get_template_part('template-parts/upcoming-events'); ?>
+			</div>
+		</div>
+	</div>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+	<div class="home-buttondiv clear">
+		<div class="innerwrap">
+			<div class="wrapper">
+				<?php if ($button_name && $button_link) { ?>
+					<a class="btn-orange" href="<?php echo $button_link ?>">
+						<span class="txt"><?php echo $button_name ?></span>
+						<span class="top-border-left-right"></span>
+						<span class="mid"></span>
+					</a>
+				<?php } ?>
+			</div>
+		</div>
+	</div>
 
+	
+</div><!-- #primary -->
 <?php
-get_sidebar();
 get_footer();

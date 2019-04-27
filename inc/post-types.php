@@ -6,18 +6,11 @@ add_action('init', 'js_custom_init', 1);
 function js_custom_init() {
     $post_types = array(
         array(
-            'post_type' => 'team',
-            'menu_name' => 'Team',
-            'plural'    => 'Team',
-            'single'    => 'Team',
-            'menu_icon' => 'dashicons-groups',
-            'supports'  => array('title','editor','thumbnail')
-        ),
-        array(
-            'post_type' => 'testimonial',
-            'menu_name' => 'Testimonials',
-            'plural'    => 'Testimonials',
-            'single'    => 'Testimonial',
+            'post_type' => 'events',
+            'menu_name' => 'Events',
+            'plural'    => 'Events',
+            'single'    => 'Event',
+            'menu_icon' => 'dashicons-star-filled',
             'supports'  => array('title','editor','thumbnail')
         ),
     );
@@ -138,10 +131,12 @@ function set_custom_cpt_columns($columns) {
     $post_type = ( isset($query['post_type']) ) ? $query['post_type'] : '';
     
     
-    if($post_type=='team') {
+    if($post_type=='events') {
         unset( $columns['date'] );
-        $columns['photo'] = __( 'Photo', 'bellaworks' );
-        $columns['date'] = __( 'Date', 'bellaworks' );
+        $columns['photo'] = __( 'Image', 'bellaworks' );
+        $columns['event_date'] = __( 'Event Date', 'bellaworks' );
+        $columns['status'] = __( 'Status', 'bellaworks' );
+        $columns['date'] = __( 'Created', 'bellaworks' );
     }
     
     return $columns;
@@ -154,20 +149,43 @@ function custom_post_column( $column, $post_id ) {
     $query = isset($wp_query->query) ? $wp_query->query : '';
     $post_type = ( isset($query['post_type']) ) ? $query['post_type'] : '';
     
-    if($post_type=='team') {
+    if($post_type=='events') {
         switch ( $column ) {
             case 'photo' :
-                $img = get_field('team_individual_image',$post_id);
-                $img_src = ($img) ? $img['sizes']['thumbnail'] : '';
+                $thumbnail_id = get_post_thumbnail_id($post_id);
+                $img = wp_get_attachment_image_src($thumbnail_id,'small-thumbnail');
+                $img_src = ($img) ? $img[0] : '';
                 $the_photo = '<span class="tmphoto" style="display:inline-block;width:50px;height:50px;background:#e2e1e1;text-align:center;">';
                 if($img_src) {
                    $the_photo .= '<img src="'.$img_src.'" alt="" style="width:100%;height:auto" />';
                 } else {
-                    $the_photo .= '<i class="dashicons dashicons-businessman" style="font-size:33px;position:relative;top:8px;left:-6px;opacity:0.3;"></i>';
+                    $the_photo .= '<i class="dashicons dashicons-format-image" style="font-size:23px;position:relative;top:14px;left:-1px;opacity:0.2;"></i>';
                 }
                 $the_photo .= '</span>';
                 echo $the_photo;
+                break;
+            case 'status' :
+                $status = get_field('event_status',$post_id);
+                $stat = ($status=='active') ? 'active' : 'done';
+                $statusTxt = ($status=='active') ? 'Active' : 'Done';
+                echo '<span class="event-status '.$stat.'">' . $statusTxt . '</span>';
+                break;
+            case 'event_date' :
+                $start_date = get_field('start_date',$post_id);
+                $end_date = get_field('end_date',$post_id);
+                $event_date_arr = array($start_date,$end_date);
+                $event_date_arr = array_filter($event_date_arr);
+                $event_date = '';
+                if($event_date_arr){
+                    $event_date = implode(' - ',$event_date_arr);
+                }                
+                echo $event_date;
+                break;
         }
     }
     
 }
+
+
+
+

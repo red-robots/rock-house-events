@@ -15,21 +15,18 @@ div,h1,h2,h3,h4,h5,h6,p,li,a,span,strong {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 }
+a {
+	@include transition(all ease-out .3s);
+}
 .clear:before, .clear:after { content: " "; display: table; }
 .clear { *zoom: 1; }
 .clear {clear: both;}
 .wrapper {
+	max-width: 1200px;
 	width: 100%;
 	margin: 0px auto;
-	padding: 20px;
-	
-	@media screen and (min-width: $tabwidth) {
-		width: 100%;
-	}
-	@media screen and (min-width: $deskwidth) {
-		width: 1200px;
-		padding: 0px;
-	}
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .content-area {
@@ -62,29 +59,93 @@ div,h1,h2,h3,h4,h5,h6,p,li,a,span,strong {
 
 /* Logo */
 .logo , h1.logo {
-	width: 300px;
-	margin: 10px auto;
-
-	@media screen and (min-width: $tabwidth) {
-		width: 300px;
-		float: left;
-		margin: 0;
-	}
-	@media screen and (min-width: $deskwidth) {
-		/*width: 1200px;*/
-	}
-}
-.logo a, h1.logo a {
-	width: 300px;
 	display: block;
-
+	width: 300px;
+	margin: 0 auto;
 	@media screen and (min-width: $tabwidth) {
-		width: 300px;
+		float: left;
+		width: 185px;
 	}
-	@media screen and (min-width: $deskwidth) {
-		/*width: 1200px;*/
+	a,img {
+		display: block;
+		width: 100%;
+		height: auto;
+		float: left;
 	}
 }
+.site-header {
+	.flexrow {
+		@media screen and (min-width: $tabwidth) {
+			@include flexbox-align-items(center);
+		}
+	}
+	.wrapper {
+		@media screen and (min-width: $tabwidth) {
+			padding-top: 20px;
+			padding-bottom: 30px;
+		}
+	}
+	.leftcol {
+		@media screen and (min-width: $tabwidth) {
+			width: 35%;
+			float: left;
+		}
+	}
+	.rightcol {
+		@media screen and (min-width: $tabwidth) {
+			width: 63%;
+			float: right;
+		}
+	}
+	.social-media {
+		text-align: center;
+		@media screen and (min-width: $tabwidth) {
+			text-align: right;
+			margin-bottom: 5px;
+		}
+		a {
+			display: inline-block;
+			font-size: 20px;
+    		line-height: 1;
+    		color: $color-light-grey;
+    		position: relative;
+    		margin-left: 5px;
+    		span {
+    			display: inline-block;
+    			width: 20px;
+    			@include transition(all ease-out .3s);
+    		}
+		}
+		a.facebook:hover {
+			color: #3e5dab;
+		}
+		a.twitter:hover {
+			color: #1da1f2;
+		}
+		a.instagram {
+			left: -3px;
+		}
+		a.instagram .hover {
+			opacity: 0;
+			visibility: hidden;
+			position: absolute;
+			top: 0;
+			left: 2px;
+    		width: 18px;
+		}
+		a.instagram:hover {
+			.normal {
+				opacity: 0;
+				visibility: hidden;
+			}
+			.hover {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+	}
+}
+
 .site-footer {
 	width: 100%;
 	clear: both;
