@@ -20,38 +20,67 @@ if($featured_event) {
 	$featured_event_id = $featured_event->ID;
 	$args['post__not_in'] = array($featured_event_id);
 }
-$events = new WP_Query($args);
-if ( $events->have_posts() ) {  ?>
+$eventsPost = get_posts($args);
+$events = new WP_Query($args); 
+$total_events = ($eventsPost) ? count($eventsPost) : 0; 
+$blank_items = 0;
+if($total_events>0) {
+	if($total_events<6) {
+		$blank_items =  $max_post - $total_events;
+	}
+} else {
+	$blank_items = $max_post;
+}
+
+$noImageURL = get_bloginfo('template_url').'/images/noimage.png';
+?>
 <div class="upcoming-events-list">
 	<div class="flexrow clear">
-	<?php while ( $events->have_posts() ) : $events->the_post();  
-		$pid = get_the_ID();
-		$pagelink = get_permalink($pid);
-		$thumb_id = get_post_thumbnail_id($pid);
-		$featImg = wp_get_attachment_image_src($thumb_id,'medium_large');
-		$noImageURL = get_bloginfo('template_url').'/images/noimage.png';
-		$imageSrc = ($featImg) ? $featImg[0] : $noImageURL;
-		$event_name = get_the_title($pid);
-		$start_date = get_field('start_date',$pid);
-		?>
-		<div class="flexcol eventInfo">
-			<div class="imagediv" style="background-image:url('<?php echo $imageSrc;?>');">
-				<img class="feat-img" src="<?php echo $imageSrc;?>" alt="<?php echo $event_name ?>" />
-				<a class="details" href="<?php echo $pagelink; ?>">
-					<span class="eventtitle">
-						<span class="txtwrap">
-							<span class="event_name"><?php echo $event_name ?></span>
-							<?php if ($start_date) { ?>
-							<span class="start_date"><?php echo $start_date ?></span>
-							<?php } ?>
+	<?php if ( $events->have_posts() ) {  ?>
+		<?php while ( $events->have_posts() ) : $events->the_post();  
+			$pid = get_the_ID();
+			$pagelink = get_permalink($pid);
+			$thumb_id = get_post_thumbnail_id($pid);
+			$featImg = wp_get_attachment_image_src($thumb_id,'medium_large');
+			$imageSrc = ($featImg) ? $featImg[0] : $noImageURL;
+			$event_name = get_the_title($pid);
+			$start_date = get_field('start_date',$pid);
+			?>
+			<div class="flexcol eventInfo">
+				<div class="imagediv" style="background-image:url('<?php echo $imageSrc;?>');">
+					<img class="feat-img" src="<?php echo $imageSrc;?>" alt="<?php echo $event_name ?>" />
+					<a class="details" href="<?php echo $pagelink; ?>">
+						<span class="eventtitle">
+							<span class="txtwrap">
+								<span class="event_name"><?php echo $event_name ?></span>
+								<?php if ($start_date) { ?>
+								<span class="start_date"><?php echo $start_date ?></span>
+								<?php } ?>
+							</span>
 						</span>
-					</span>
-					<span class="eventcaption">
-					</span>
-				</a>
+						<span class="eventcaption">
+						</span>
+					</a>
+				</div>
 			</div>
-		</div>
-	<?php endwhile; wp_reset_postdata(); ?>
+		<?php endwhile; wp_reset_postdata(); ?>
+	<?php } ?>
+
+	<?php if ($blank_items>0) { ?>
+		<?php for($i=1; $i<=$blank_items; $i++) { ?>
+			<div class="flexcol eventInfo comingsoon">
+				<div class="imagediv" style="background-image:url('<?php echo $noImageURL;?>');">
+					<img class="feat-img" src="<?php echo $noImageURL;?>" alt="" />
+					<div class="details">
+						<span class="eventtitle">
+							<span class="txtwrap">
+								<span class="event_name">Event coming soon</span>
+							</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+	<?php } ?>
 	</div>
 </div>
-<?php } ?>

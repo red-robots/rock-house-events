@@ -157,6 +157,14 @@
 			width: 100%;
 		}
 	}
+	.comingsoon {
+		.details span.eventtitle {
+			background: rgba(0,0,0,.85);
+			.txtwrap {
+				opacity: 0.6;
+			}
+		}
+	}
 }
 .home-buttondiv {
 	width: 100%;

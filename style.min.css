@@ -1831,6 +1831,8 @@ a{-webkit-transition:all ease-out .3s;transition:all ease-out .3s}
 @media screen and (min-width:900px){.upcoming-events-list .feat-img{display:none}
 }.upcoming-events-list .details span.eventtitle{display:block;width:100%;height:100%;box-sizing:border-box;padding:20px;text-align:center;background:rgba(239,125,64,0.85);color:#FFF;font-family:"Black Han Sans",sans-serif;text-transform:uppercase;letter-spacing:1px;line-height:1.2;display:-webkit-box;display:-ms-flexbox;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-flex-direction:row;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-justify-content:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-align-content:center;-ms-flex-line-pack:center;align-content:center}
 .upcoming-events-list .details span.eventtitle span{display:block;width:100%}
+.upcoming-events-list .comingsoon .details span.eventtitle{background:rgba(0,0,0,0.85)}
+.upcoming-events-list .comingsoon .details span.eventtitle .txtwrap{opacity:.6}
 .home-buttondiv{width:100%;border-top:2px solid #FFF;height:21px;background:#000;position:relative;z-index:10}
 .home-buttondiv:before{content:"";display:block;width:100%;height:2px;background:#ef7d40;position:absolute;top:9px;left:0}
 .home-buttondiv .innerwrap{width:100%;position:absolute;top:0;left:0}
