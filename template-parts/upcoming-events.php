@@ -45,11 +45,12 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 			$imageSrc = ($featImg) ? $featImg[0] : $noImageURL;
 			$event_name = get_the_title($pid);
 			$start_date = get_field('start_date',$pid);
+			$short_description = get_field('event_short_description',$pid);
 			?>
 			<div class="flexcol eventInfo">
 				<div class="imagediv" style="background-image:url('<?php echo $imageSrc;?>');">
 					<img class="feat-img" src="<?php echo $imageSrc;?>" alt="<?php echo $event_name ?>" />
-					<a class="details" href="<?php echo $pagelink; ?>">
+					<a class="details <?php echo ($short_description) ? 'has-caption':'no-caption';?>" href="<?php echo $pagelink; ?>">
 						<span class="eventtitle">
 							<span class="txtwrap">
 								<span class="event_name"><?php echo $event_name ?></span>
@@ -58,8 +59,11 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 								<?php } ?>
 							</span>
 						</span>
-						<span class="eventcaption">
-						</span>
+						<?php if ($short_description) { ?>
+							<span class="eventcaption">
+								<span class="txtpad"><?php echo $short_description ?> <span class="moretxt">more</span></span>
+							</span>
+						<?php } ?>
 					</a>
 				</div>
 			</div>

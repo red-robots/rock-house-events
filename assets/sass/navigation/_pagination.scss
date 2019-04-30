@@ -41,3 +41,18 @@
 .navigation li.active a {
 	background-color: #F47A21;
 }
+
+.nav-links {
+	width: 100%;
+	float: left;
+}
+.nav-previous {
+	@media screen and (min-width: $tabwidth) {
+		float: left;
+	}
+}
+.nav-next {
+	@media screen and (min-width: $tabwidth) {
+		float: right;
+	}
+}

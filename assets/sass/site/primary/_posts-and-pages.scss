@@ -10,6 +10,12 @@
 	}
 }
 
+.default-template {
+	.site-main {
+		min-height: 25em;
+	}
+}
+
 .black-navigation {
 	background: #000;
 	display: none;
@@ -66,7 +72,7 @@
 			height: 100%;
 		}
 		&:focus {
-			border: 5px solid #FFF;
+			border: 1px dotted #FFF;
 		}
 	}
 	.featured-event {
@@ -108,6 +114,7 @@
 		}
 	}
 	.details {
+		cursor: pointer;
 		display: block;
 		width: 100%;
 		height: 100%;
@@ -120,7 +127,7 @@
 			width: 100%;
 		}
 		&:focus {
-			border: 5px solid #FFF;
+			border: 1px dotted #FFF;
 		}
 	}
 	.feat-img {
@@ -152,17 +159,70 @@
 		@include flexbox-direction(row);
 		@include flexbox-justify(center);
 		@include flexbox-align-content(center);
+		@include transition(all ease .3s);
 		span {
 			display: block;
 			width: 100%;
+		}
+		* {
+			@include transition(all ease .3s);
+		}
+		.txtwrap {
+			margin-top: 0;
 		}
 	}
 	.comingsoon {
 		.details span.eventtitle {
 			background: rgba(0,0,0,.85);
 			.txtwrap {
+				transform: none;
 				opacity: 0.6;
 			}
+		}
+	}
+	.details .eventcaption {
+		display: block;
+		width: 100%;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		background: #FFF;
+		font-size: 12px;
+		line-height: 1.3;
+		color: $color__text-main;
+		transform:translateY(100%);
+		@include transition(all ease .3s);
+		* {
+			@include transition(all ease .3s);
+		}
+		.txtpad {
+			display: block;
+			padding: 10px;
+		}
+		p:first-child {
+			margin-top: 0;
+		}
+		p {
+			margin-top: 10px;
+			margin-bottom: 0;
+		}
+		.moretxt {
+			display: inline;
+			color: $color-red;
+			text-decoration: underline;
+		}
+	}
+	.details.has-caption:hover {
+		span.eventtitle {
+			background: transparent;
+			.txtwrap {
+				transform:translateY(-50%);
+				opacity: 0;
+				visibility: hidden;
+			}
+		}
+		.eventcaption {
+			transform:translateY(0);
 		}
 	}
 }
@@ -287,3 +347,36 @@
 		}
 	}
 }
+.page-link-list {
+	ul {
+		margin: 0 0;
+		padding: 0 0;
+		list-style: none;
+	}
+	ul.linklist ul {
+		padding-left: 15px;
+	}
+	li {
+		position: relative;
+		padding-left: 14px;
+		&:before {
+			content:"";
+			display: block;
+			width: 6px;
+			height: 6px;
+			background: $color-orange;
+			position: absolute;
+			top: 8px;
+			left: 0;
+		}
+		a {
+			display: inline-block;
+			color: $color-orange;
+			text-decoration: none;
+			&:hover {
+				opacity: 0.45;
+			}
+		}
+	}
+}
+

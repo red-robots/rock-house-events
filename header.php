@@ -70,12 +70,14 @@
 		        		<?php } ?>
 		        	</div>
 					<nav id="site-navigation" class="main-navigation" role="navigation">
-						<span class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i aria-label="Menu"></i></span>
+						<span id="toggleMenu" class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><span><i aria-label="Menu"></i></span></span>
 						<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu','container_class'=>'main-menu-wrapper','link_before'=>'<span>','link_after'=>'</span>' ) ); ?>
 					</nav><!-- #site-navigation -->
 				</div>
 			</div>
 		</div><!-- wrapper -->
 	</header><!-- #masthead -->
+
+	<div class="black-border wrapper clear"><div class="clear"></div></div>
 
 	<div id="content" class="site-content clear">
