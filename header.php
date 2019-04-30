@@ -78,6 +78,12 @@
 		</div><!-- wrapper -->
 	</header><!-- #masthead -->
 
-	<div class="black-border wrapper clear"><div class="clear"></div></div>
+	<?php if ( !is_home() ) { ?>
+	<div class="pagetitlediv clear">
+		<div class="wrapper clear">
+			<h1 class="pageTitle"><?php echo get_the_title(); ?></h1>
+		</div>
+	</div>	
+	<?php } ?>
 
 	<div id="content" class="site-content clear">
