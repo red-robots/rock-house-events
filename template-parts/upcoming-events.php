@@ -37,7 +37,7 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 <div class="upcoming-events-list">
 	<div class="flexrow clear">
 	<?php if ( $events->have_posts() ) {  ?>
-		<?php while ( $events->have_posts() ) : $events->the_post();  
+		<?php $j=1; while ( $events->have_posts() ) : $events->the_post();  
 			$pid = get_the_ID();
 			$pagelink = get_permalink($pid);
 			$thumb_id = get_post_thumbnail_id($pid);
@@ -47,7 +47,7 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 			$start_date = get_field('start_date',$pid);
 			$short_description = get_field('event_short_description',$pid);
 			?>
-			<div class="flexcol eventInfo">
+			<div id="eventinfo_<?php echo $j;?>" class="flexcol eventInfo">
 				<div class="imagediv" style="background-image:url('<?php echo $imageSrc;?>');">
 					<img class="feat-img" src="<?php echo $imageSrc;?>" alt="<?php echo $event_name ?>" />
 					<a class="details <?php echo ($short_description) ? 'has-caption':'no-caption';?>" href="<?php echo $pagelink; ?>">
@@ -67,12 +67,14 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 					</a>
 				</div>
 			</div>
-		<?php endwhile; wp_reset_postdata(); ?>
+		<?php $j++; endwhile; wp_reset_postdata(); ?>
 	<?php } ?>
 
-	<?php if ($blank_items>0) { ?>
-		<?php for($i=1; $i<=$blank_items; $i++) { ?>
-			<div class="flexcol eventInfo comingsoon">
+	<?php if ($blank_items>0) { 
+		$ctr = ($j>1) ? $j : 0; ?>
+		<?php for($i=1; $i<=$blank_items; $i++) { 
+			$num = $ctr + $i; ?>
+			<div id="eventinfo_<?php echo $num;?>" class="flexcol eventInfo comingsoon">
 				<div class="imagediv" style="background-image:url('<?php echo $noImageURL;?>');">
 					<img class="feat-img" src="<?php echo $noImageURL;?>" alt="" />
 					<div class="details">

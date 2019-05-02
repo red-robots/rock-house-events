@@ -1887,7 +1887,8 @@ a{-webkit-transition:all ease-out .3s;transition:all ease-out .3s}
 .upcoming-events-list .details .eventcaption p:first-child{margin-top:0}
 .upcoming-events-list .details .eventcaption p{margin-top:10px;margin-bottom:0}
 .upcoming-events-list .details .eventcaption .moretxt{display:inline;color:#ba1b17;text-decoration:underline}
-.upcoming-events-list .details.has-caption:hover span.eventtitle{background:transparent}
+@media screen and (min-width:600px){.upcoming-events-list #eventinfo_5 .details .eventcaption .txtpad{padding-bottom:25px}
+}.upcoming-events-list .details.has-caption:hover span.eventtitle{background:transparent}
 .upcoming-events-list .details.has-caption:hover span.eventtitle .txtwrap{-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);opacity:0;visibility:hidden}
 .upcoming-events-list .details.has-caption:hover .eventcaption{-webkit-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0)}
 .home-buttondiv{width:100%;border-top:2px solid #FFF;height:21px;background:#000;position:relative;z-index:10}
