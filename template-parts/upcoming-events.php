@@ -6,9 +6,9 @@ $args = array(
 	'posts_per_page'   => $max_post,
 	'post_type'        => 'events',
 	'post_status'      => 'publish',
-	'meta_key'			=> 'start_date',
-	'orderby'			=> 'meta_value',
-	'order'				=> 'DESC',
+	'meta_key'		=> 'start_date',
+	'orderby'	=> 'meta_value_num',
+	'order' => 'ASC',
 	'meta_query' => array(
         array(
             'key' => 'event_status',
@@ -16,6 +16,7 @@ $args = array(
         ),
     )
 );
+
 if($featured_event) {
 	$featured_event_id = $featured_event->ID;
 	$args['post__not_in'] = array($featured_event_id);

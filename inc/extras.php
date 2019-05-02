@@ -385,3 +385,4 @@ function get_instagram_setup() {
 function get_home_page_id() {
     return 2; /* Homepage ID */
 }
+
