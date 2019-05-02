@@ -135,6 +135,7 @@ function set_custom_cpt_columns($columns) {
         unset( $columns['date'] );
         $columns['photo'] = __( 'Image', 'bellaworks' );
         $columns['event_date'] = __( 'Event Date', 'bellaworks' );
+        $columns['event_time'] = __( 'Event Time', 'bellaworks' );
         $columns['status'] = __( 'Status', 'bellaworks' );
         $columns['date'] = __( 'Created', 'bellaworks' );
     }
@@ -180,6 +181,17 @@ function custom_post_column( $column, $post_id ) {
                     $event_date = implode(' - ',$event_date_arr);
                 }                
                 echo $event_date;
+                break;
+            case 'event_time' :
+                $start_time = get_field('event_start_time',$post_id);
+                $end_time = get_field('event_end_time',$post_id);
+                $event_date_arr = array($start_time,$end_time);
+                $event_date_arr = array_filter($event_date_arr);
+                $event_time = '';
+                if($event_date_arr){
+                    $event_time = implode('-',$event_date_arr);
+                }                
+                echo $event_time;
                 break;
         }
     }
