@@ -71,7 +71,7 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 	<?php } ?>
 
 	<?php if ($blank_items>0) { 
-		$ctr = ($j>1) ? $j : 0; ?>
+		$ctr = ($j>1) ? $j-1 : 0; ?>
 		<?php for($i=1; $i<=$blank_items; $i++) { 
 			$num = $ctr + $i; ?>
 			<div id="eventinfo_<?php echo $num;?>" class="flexcol eventInfo comingsoon">
