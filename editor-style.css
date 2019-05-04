@@ -21,7 +21,7 @@ a.buyTicketBtn i {
 	font-size: 37px;
     line-height: 27px;
 }
-.mce-content-body .buyTicketBtn[data-mce-selected="inline-boundary"] {
+.mce-content-body a.buyTicketBtn[data-mce-selected] {
 	border: 2px solid #0085ba;
 	border-radius: 10px;
 	background-color: transparent;
