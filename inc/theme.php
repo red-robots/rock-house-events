@@ -349,7 +349,7 @@ function my_custom_styles() { ?>
         body.post-type-events .featHome .dashicons {
             font-size: 23px;
         }
-        .mce-widget button#mceu_13-button {
+        .mce-buy-tick-btn button {
           color: #555;
           border: 1px solid #ccc;
           background: #f7f7f7;
