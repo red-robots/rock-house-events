@@ -357,10 +357,10 @@ function my_custom_styles() { ?>
           border-radius: 3px;
           padding: 3px 6px;
         }
-        #mceu_13.mce-btn:hover {
+        .mce-buy-tick-btn.mce-btn:hover {
           border-color: transparent;
         }
-        .mce-widget button#mceu_13-button:hover {
+        .mce-buy-tick-btn button:hover {
           color: #23282d;
           border-color: #0d0e10;
           border-radius: 3px;
