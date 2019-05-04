@@ -211,10 +211,14 @@
 			color: $color-red;
 			text-decoration: underline;
 		}
+		.titletxt {
+			font-weight: 800;
+			text-transform: uppercase;
+		}
 	}
 	#eventinfo_5 .details .eventcaption .txtpad {
 		@media screen and (min-width: $tabwidth) {
-			padding-bottom: 25px;
+			padding-bottom: 28px;
 		}  
 	}
 	.details.has-caption:hover {
@@ -382,6 +386,70 @@
 				opacity: 0.45;
 			}
 		}
+	}
+}
+
+a.buyTicketBtn {
+	display: inline-block;
+	border: 2px solid #f38d10;
+	width: 120px;
+	height: 90px;
+	padding: 5px 6px 7px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	color: transparent;
+	overflow: hidden;
+}
+a.buyTicketBtn i {
+	display: block;
+	background:url('images/Buy-Ticket.jpg') center no-repeat;
+	background-size: contain;
+	width: 100%;
+	height: 100%;
+	font-size: 37px;
+    line-height: 27px;
+}
+
+.event-detail-page {
+	.wrapper {
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+}
+.event-feat-image {
+	margin-bottom: 20px;
+	margin-top: 6px;
+	@media screen and (min-width: $midwidth) {
+		width: 61%;
+		float: left;
+		margin-bottom: 0;
+	}
+	img {
+		width: 100%;
+		height: auto;
+	}
+}
+.event-information {
+	&.half {
+		@media screen and (min-width: $midwidth) {
+			width: 35.5%;
+			float: right;
+		}
+	}
+}
+
+.entry-content {
+	p {
+		margin-top: 0;
+	}
+	h2,h3,h4 {
+		margin-top: 0;
+	}
+	h2 {
+		font-size: 25px;
+	}
+	h3 {
+		font-size: 20px;
 	}
 }
 

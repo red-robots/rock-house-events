@@ -30,8 +30,6 @@ get_header(); ?>
 
 	<?php  
 		$featured_event = get_field('featured_event',$home_page_id);
-		$button_name = get_field('button_name',$home_page_id);
-		$button_link = get_field('button_link',$home_page_id);
 	?>
 	<div class="content-wrap-events clear">
 		<div class="flexrow clear">
@@ -50,20 +48,6 @@ get_header(); ?>
 			<div class="flexcol upcoming-events js-blocks">
 				<div class="blackdiv"><span aria-label="true" class="eventSectionTitle">Upcoming Events</span></div>
 				<?php get_template_part('template-parts/upcoming-events'); ?>
-			</div>
-		</div>
-	</div>
-
-	<div class="home-buttondiv clear">
-		<div class="innerwrap">
-			<div class="wrapper">
-				<?php if ($button_name && $button_link) { ?>
-					<a class="btn-orange" href="<?php echo $button_link ?>">
-						<span class="txt"><?php echo $button_name ?></span>
-						<span class="top-border-left-right"></span>
-						<span class="mid"></span>
-					</a>
-				<?php } ?>
 			</div>
 		</div>
 	</div>

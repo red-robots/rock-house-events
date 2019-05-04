@@ -174,7 +174,7 @@ a {
 .footer-info {
 	text-align: center;
 	padding-top: 5px;
-	padding-bottom: 15px;
+	padding-bottom: 20px;
 	font-size: 13px;
 	line-height: 1.3;
 	color: #535353;
@@ -186,10 +186,15 @@ a {
 		}
 	}
 	span {
-		border-left: 1px solid #535353;
+		display: block;
 		line-height: 1;
-		padding-left: 15px;
-		padding-right: 15px;
+		padding: 6px 15px;
+		text-align: center;
+		@media screen and (min-width: $tabwidth) {
+			display: inline-block;
+			border-left: 1px solid #535353;
+			padding: 0 15px;
+		}
 	}
 	span:first-child {
 		border-left: none;

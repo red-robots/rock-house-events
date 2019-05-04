@@ -1,5 +1,23 @@
 	</div><!-- #content -->
 
+	<?php  
+	$button_name = get_field('footer_button_name','option');
+	$button_link = get_field('footer_button_link','option');
+	?>
+	<div class="home-buttondiv clear">
+		<div class="innerwrap">
+			<div class="wrapper">
+				<?php if ($button_name && $button_link) { ?>
+					<a class="btn-orange" href="<?php echo $button_link ?>">
+						<span class="txt"><?php echo $button_name ?></span>
+						<span class="top-border-left-right"></span>
+						<span class="mid"></span>
+					</a>
+				<?php } ?>
+			</div>
+		</div>
+	</div>
+
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="wrapper">
 			<div class="inner-pad clear">

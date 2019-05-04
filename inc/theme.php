@@ -304,3 +304,69 @@ class WP_Image_Size_Limit {
 }
 $WP_Image_Size_Limit = new WP_Image_Size_Limit;
 add_action('admin_head', array($WP_Image_Size_Limit, 'load_styles'));
+
+
+// hooks your functions into the correct filters
+function wdm_add_mce_button() {
+            // check user permissions
+            if ( !current_user_can( 'edit_posts' ) &&  !current_user_can( 'edit_pages' ) ) {
+                       return;
+               }
+           // check if WYSIWYG is enabled
+           if ( 'true' == get_user_option( 'rich_editing' ) ) {
+               add_filter( 'mce_external_plugins', 'wdm_add_tinymce_plugin' );
+               add_filter( 'mce_buttons', 'wdm_register_mce_button' );
+               }
+}
+add_action('admin_head', 'wdm_add_mce_button');
+
+// register new button in the editor
+function wdm_register_mce_button( $buttons ) {
+            array_push( $buttons, 'wdm_mce_button' );
+            return $buttons;
+}
+
+// declare a script for the new button
+// the script will insert the shortcode on the click event
+function wdm_add_tinymce_plugin( $plugin_array ) {
+          $plugin_array['wdm_mce_button'] = get_stylesheet_directory_uri() .'/assets/js/wdm-mce-button.js';
+          return $plugin_array;
+}
+
+
+add_action('admin_head', 'my_custom_styles');
+function my_custom_styles() { ?>
+    <style type="text/css">
+        body.post-type-events th#featured {
+            width: 35px;
+            padding: 0 0;
+        }
+        body.post-type-events .featHome {
+            position: relative;
+            left: -8px;
+            color: #ffb41f;
+        }
+        body.post-type-events .featHome .dashicons {
+            font-size: 23px;
+        }
+        .mce-widget button#mceu_13-button {
+          color: #555;
+          border: 1px solid #ccc;
+          background: #f7f7f7;
+          box-shadow: 0 1px 0 #ccc;
+          border-radius: 3px;
+          padding: 3px 6px;
+        }
+        #mceu_13.mce-btn:hover {
+          border-color: transparent;
+        }
+        .mce-widget button#mceu_13-button:hover {
+          color: #23282d;
+          border-color: #0d0e10;
+          border-radius: 3px;
+        }
+    </style>
+<?php }
+
+
+

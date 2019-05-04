@@ -62,7 +62,9 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 						</span>
 						<?php if ($short_description) { ?>
 							<span class="eventcaption">
-								<span class="txtpad"><?php echo $short_description ?> <span class="moretxt">more</span></span>
+								<span class="txtpad">
+									<strong class="titletxt"><?php echo $event_name ?></strong> - <?php echo $short_description ?>
+								<span class="moretxt">more</span></span>
 							</span>
 						<?php } ?>
 					</a>

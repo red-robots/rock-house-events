@@ -1,6 +1,5 @@
 <?php 
 /* Custom Post Types */
-
 //DASH ICONS = https://developer.wordpress.org/resource/dashicons/
 add_action('init', 'js_custom_init', 1);
 function js_custom_init() {
@@ -132,7 +131,10 @@ function set_custom_cpt_columns($columns) {
     
     
     if($post_type=='events') {
+        unset( $columns['title'] );
         unset( $columns['date'] );
+        $columns['title'] = __( 'Title', 'bellaworks' );
+        $columns['featured'] = __( '', 'bellaworks' );
         $columns['photo'] = __( 'Image', 'bellaworks' );
         $columns['event_date'] = __( 'Event Date', 'bellaworks' );
         $columns['event_time'] = __( 'Event Time', 'bellaworks' );
@@ -152,6 +154,16 @@ function custom_post_column( $column, $post_id ) {
     
     if($post_type=='events') {
         switch ( $column ) {
+            case 'featured' :
+                $homepage_id = get_home_page_id();
+                $feat = get_field('featured_event',$homepage_id);
+                $feat_post_id = ($feat) ? $feat->ID : 0;
+                if($post_id==$feat_post_id) {
+                    $home_page_url = get_admin_url() . 'post.php?post='.$homepage_id.'&action=edit';
+                    echo '<a href="'.$home_page_url.'" class="featHome" title="Featured Event"><i class="dashicons dashicons-star-filled"></i></a>';
+                }
+                break;
+
             case 'photo' :
                 $thumbnail_id = get_post_thumbnail_id($post_id);
                 $img = wp_get_attachment_image_src($thumbnail_id,'small-thumbnail');
@@ -197,7 +209,6 @@ function custom_post_column( $column, $post_id ) {
     }
     
 }
-
 
 
 
