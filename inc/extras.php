@@ -46,6 +46,7 @@ if( function_exists('acf_add_options_page') ) {
 
 function add_query_vars_filter( $vars ) {
   $vars[] = "pg";
+  $vars[] = "pastpg";
   return $vars;
 }
 add_filter( 'query_vars', 'add_query_vars_filter' );
@@ -426,8 +427,10 @@ function get_upcoming_events_list($limit=6,$excludeId=null) {
    
     if($limit>0) {
       for($k=0;$k<$limit;$k++) {
-        $data = $records[$k];
-        $records_limit[$k] = $data;
+        $data = ( isset($records[$k]) && $records[$k] ) ? $records[$k]:'';
+        if($data) {
+          $records_limit[$k] = $data;
+        }
       }
     }
   }
@@ -442,6 +445,95 @@ function get_upcoming_events_list($limit=6,$excludeId=null) {
 
 function get_all_events($limit=6,$excludeId=null,$pageNum=1) {
   $records = get_upcoming_events_list(-1, $excludeId);
+  $final_records = array();
+
+  if($pageNum) {
+    $x = $pageNum*$limit;
+    $x = $x-$limit;
+    $offset = $x;
+  } 
+
+  if($records) {
+    $total = count($records);
+    $start = $offset;
+    if($offset==0) {
+      $max = $limit;
+    } else {
+      $max = $start + $limit;
+    }
+
+    for($x=$start; $x<$max; $x++) {
+      if( isset($records[$x]) ) {
+        $item = $records[$x];
+        $final_records[$x] = $item;
+      }
+    }
+  }
+
+  return $final_records;
+
+}
+
+
+function get_old_events_list($limit=6,$excludeId=null) {
+  global $wpdb;
+  $date_today = date('Ymd');
+  $date_now = strtotime($date_today);
+  $records = array();
+  $records_limit = array();
+  $list = array();
+  $home_page_id = get_home_page_id();
+  $featured_event = get_field('featured_event',$home_page_id);
+  $feat_id = ($featured_event) ? $featured_event->ID : 0;
+
+  $query = "SELECT post.* FROM $wpdb->posts post, $wpdb->postmeta meta
+            WHERE post.ID=meta.post_id AND post.post_status='publish' AND post.post_type='events' ORDER BY post.menu_order ASC";
+  $result = $wpdb->get_results($query);
+  if($result) {
+    $i=1; foreach($result as $row) {
+      $post_id = $row->ID;
+      $s_date = get_field('start_date',$post_id);
+      $e_date = get_field('end_date',$post_id);
+      if($s_date) {
+        $end_date = (empty($e_date)) ? $s_date : $e_date;
+        $start_date = ($s_date) ? strtotime($s_date) : '';
+        $end_date = ($end_date) ? strtotime($end_date) : '';
+        if($excludeId!=$post_id) {
+          if( $start_date<$date_now || $end_date<$date_now ) {
+            $k = $start_date.'_'.$post_id;
+            $list[$k] = $row;
+            $i++;
+          }
+        }
+      }
+    }
+  }
+
+  if($list) {
+    krsort($list);
+    $records = array_values($list);
+   
+    if($limit>0) {
+      for($k=0;$k<$limit;$k++) {
+        $data = ( isset($records[$k]) && $records[$k] ) ? $records[$k]:'';
+        if($data) {
+          $records_limit[$k] = $data;
+        }
+      }
+    }
+  }
+
+  if($records_limit) {
+    return $records_limit;
+  } else {
+    return $records;
+  }
+  
+}
+
+
+function get_all_old_events($limit=6,$excludeId=null,$pageNum=1) {
+  $records = get_old_events_list(-1, $excludeId);
   $final_records = array();
 
   if($pageNum) {

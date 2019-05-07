@@ -75,4 +75,16 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
+	$(document).on("click","#old_events_pagination a",function(e){
+		e.preventDefault();
+		var parts = $(this).attr('href');
+		var res = parts.split("?pastpg=");
+		var pagenum = res[1];
+		if(currentPage) {
+			var new_url = currentPage + '?pastpg=' + pagenum;
+			$("#past_events_list").load( new_url + ' #past_events_inner');
+			window.history.replaceState( null, null, new_url );
+		}
+	});
+
 });// END #####################################    END
