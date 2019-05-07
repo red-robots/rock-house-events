@@ -2,32 +2,28 @@
 $home_page_id = get_home_page_id();
 $featured_event = get_field('featured_event',$home_page_id);
 $max_post = 6;
-$feat_id = ($featured_event) ? $featured_event->ID:0;
-$events = get_upcoming_events_list($max_post,$feat_id);
+$args = array(
+	'posts_per_page'   => $max_post,
+	'post_type'        => 'events',
+	'post_status'      => 'publish',
+	'meta_key'		=> 'start_date',
+	'orderby'	=> 'meta_value_num',
+	'order' => 'ASC',
+	'meta_query' => array(
+        array(
+            'key' => 'event_status',
+            'value' => 'active'
+        ),
+    )
+);
 
-// $args = array(
-// 	'posts_per_page'   => $max_post,
-// 	'post_type'        => 'events',
-// 	'post_status'      => 'publish',
-// 	'meta_key'		=> 'start_date',
-// 	'orderby'	=> 'meta_value_num',
-// 	'order' => 'ASC',
-// 	'meta_query' => array(
-//         array(
-//             'key' => 'event_status',
-//             'value' => 'active'
-//         ),
-//     )
-// );
-
-// if($featured_event) {
-// 	$featured_event_id = $featured_event->ID;
-// 	$args['post__not_in'] = array($featured_event_id);
-// }
-// $eventsPost = get_posts($args);
-// $events = new WP_Query($args); 
-
-$total_events = ($events) ? count($events) : 0; 
+if($featured_event) {
+	$featured_event_id = $featured_event->ID;
+	$args['post__not_in'] = array($featured_event_id);
+}
+$eventsPost = get_posts($args);
+$events = new WP_Query($args); 
+$total_events = ($eventsPost) ? count($eventsPost) : 0; 
 $blank_items = 0;
 if($total_events>0) {
 	if($total_events<6) {
@@ -41,20 +37,16 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 ?>
 <div class="upcoming-events-list">
 	<div class="flexrow clear">
-	<?php $j=0;  if ( $events ) {  ?>
-		<?php $j=1; foreach($events as $row) { 
-			$pid = $row->ID;
+	<?php if ( $events->have_posts() ) {  ?>
+		<?php $j=1; while ( $events->have_posts() ) : $events->the_post();  
+			$pid = get_the_ID();
 			$pagelink = get_permalink($pid);
 			$thumb_id = get_post_thumbnail_id($pid);
 			$featImg = wp_get_attachment_image_src($thumb_id,'medium_large');
 			$imageSrc = ($featImg) ? $featImg[0] : $noImageURL;
 			$event_name = get_the_title($pid);
 			$start_date = get_field('start_date',$pid);
-			$end_date = get_field('end_date',$pid);
 			$short_description = get_field('event_short_description',$pid);
-			$event_dates_arr = array($start_date,$end_date);
-			$event_dates_arr = ($event_dates_arr && array_filter($event_dates_arr)) ? array_unique($event_dates_arr) : '';
-			$event_dates = ($event_dates_arr) ? implode(" - ",array_filter($event_dates_arr)) : '';
 			?>
 			<div id="eventinfo_<?php echo $j;?>" class="flexcol eventInfo">
 				<div class="imagediv" style="background-image:url('<?php echo $imageSrc;?>');">
@@ -63,8 +55,8 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 						<span class="eventtitle">
 							<span class="txtwrap">
 								<span class="event_name"><?php echo $event_name ?></span>
-								<?php if ($event_dates) { ?>
-								<span class="start_date"><?php echo $event_dates ?></span>
+								<?php if ($start_date) { ?>
+								<span class="start_date"><?php echo $start_date ?></span>
 								<?php } ?>
 							</span>
 						</span>
@@ -78,7 +70,7 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 					</a>
 				</div>
 			</div>
-		<?php $j++; } ?>
+		<?php $j++; endwhile; wp_reset_postdata(); ?>
 	<?php } ?>
 
 	<?php if ($blank_items>0) { 

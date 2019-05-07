@@ -63,4 +63,16 @@ jQuery(document).ready(function ($) {
 		$("#site-navigation").toggleClass('open-menu');
 	});
 
+	$(document).on("click","#events_pagination a",function(e){
+		e.preventDefault();
+		var parts = $(this).attr('href');
+		var res = parts.split("?pg=");
+		var pagenum = res[1];
+		if(currentPage) {
+			var new_url = currentPage + '?pg=' + pagenum;
+			$("#upcoming_events_list").load( new_url + ' #innerpad_content');
+			window.history.replaceState( null, null, new_url );
+		}
+	});
+
 });// END #####################################    END

@@ -1,9 +1,12 @@
 	</div><!-- #content -->
 
 	<?php  
+	global $post;
+    $post_slug = ( isset($post->post_name) ) ? $post->post_name : '';
 	$button_name = get_field('footer_button_name','option');
-	$button_link = get_field('footer_button_link','option');
-	?>
+	$button_link = get_field('footer_button_link','option'); ?>
+	
+	<?php if ($post_slug!=='events') { ?>
 	<div class="home-buttondiv clear">
 		<div class="innerwrap">
 			<div class="wrapper">
@@ -17,6 +20,7 @@
 			</div>
 		</div>
 	</div>
+	<?php } ?>
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="wrapper">
