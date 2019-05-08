@@ -30,9 +30,14 @@
 				if($logos) { ?>
 					<div class="footer-logos clear">
 						<div class="flexrow2 clear">
-							<?php foreach ($logos as $logo) { ?>
+							<?php foreach ($logos as $logo) { 
+							$image_id = $logo['ID'];
+							$image_link = get_field('image_link',$image_id); 
+							$open_link = ($image_link) ? '<a href="'.$image_link.'" target="_blank">':'';
+							$close_link = ($image_link) ? '</a>':'';
+							?>
 							<div class="flexcol">
-								<img class="logoImg" src="<?php echo $logo['url'] ?>" alt="<?php echo $logo['title'] ?>" />
+								<?php echo $open_link; ?><img class="logoImg" src="<?php echo $logo['url'] ?>" alt="<?php echo $logo['title'] ?>" /><?php echo $close_link; ?>
 							</div>
 							<?php } ?>
 						</div>

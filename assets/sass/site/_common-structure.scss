@@ -126,11 +126,17 @@ a {
 		}
 		a {
 			display: inline-block;
-			font-size: 20px;
+			font-size: 30px;
     		line-height: 1;
     		color: $color-light-grey;
     		position: relative;
-    		margin-left: 5px;
+    		margin-left: 3px;
+    		margin-right: 3px;
+    		@media screen and (min-width: $tabwidth) {
+    			font-size: 24px;
+    			margin-left: 5px;
+    			margin-right: 0;
+    		}
     		span {
     			display: inline-block;
     			width: 20px;
@@ -144,15 +150,28 @@ a {
 			color: #1da1f2;
 		}
 		a.instagram {
-			left: -3px;
+			left: 0;
+			font-size: 32px;
+			@media screen and (min-width: $tabwidth) {
+				font-size: 25px;
+			}
+			.normal {
+				width: 28px;
+				@media screen and (min-width: $tabwidth) {
+					width: 22px;
+				}
+			}
 		}
 		a.instagram .hover {
 			opacity: 0;
 			visibility: hidden;
 			position: absolute;
 			top: 0;
-			left: 2px;
-    		width: 18px;
+			left: 0;
+    		width: 28px;
+    		@media screen and (min-width: $tabwidth) {
+				width: 22px;
+			}
 		}
 		a.instagram:hover {
 			.normal {

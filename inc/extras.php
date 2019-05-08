@@ -563,5 +563,16 @@ function get_all_old_events($limit=6,$excludeId=null,$pageNum=1) {
 
 }
 
+function my_custom_admin_styles() { ?>
+  <style type="text/css">
+    #acf-field_5cc62fedfdd4a [data-name="description"],
+    #acf-field_5cc62fedfdd4a [data-name="caption"] {
+      display: none!important;
+    }
+  </style>
+<?php
+}
+add_action( 'admin_head', 'my_custom_admin_styles' );
+
 
 
