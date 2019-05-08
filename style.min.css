@@ -1893,7 +1893,7 @@ a{-webkit-transition:all ease-out .3s;transition:all ease-out .3s}
 .upcoming-events-list .details .eventcaption .txtpad{display:block;padding:10px}
 .upcoming-events-list .details .eventcaption p:first-child{margin-top:0}
 .upcoming-events-list .details .eventcaption p{margin-top:10px;margin-bottom:0}
-.upcoming-events-list .details .eventcaption .moretxt{display:inline;color:#ba1b17;text-decoration:underline}
+.upcoming-events-list .details .eventcaption .moretxt{display:inline;color:#ec1711;text-decoration:underline}
 .upcoming-events-list .details .eventcaption .titletxt{font-weight:800;text-transform:uppercase}
 @media screen and (min-width:600px){.upcoming-events-list #eventinfo_5 .details .eventcaption .txtpad{padding-bottom:30px}
 }.upcoming-events-list #eventinfo_6 .details .eventcaption .txtpad{padding-bottom:10px}
@@ -1966,7 +1966,27 @@ a.buyTicketBtn i{display:block;background:url("images/Buy-Ticket.jpg") center no
 .old-events-list .event_title,.old-events-list .event_date{display:block;width:100%}
 .old-events-list .event_date{margin-top:5px;font-size:14px}
 .old-events-list .event_details:hover{-webkit-transform:scale(1.2);-ms-transform:scale(1.2);transform:scale(1.2)}
-.blog .format-aside .entry-title,.archive .format-aside .entry-title{display:none}
+.subscription-wrapper{margin-top:40px;margin-bottom:70px}
+.subscription-wrapper form{border:1px solid #ef7d40;border-top-width:5px;display:block;max-width:100%;width:100%;padding:15px;box-sizing:border-box}
+@media screen and (min-width:600px){.subscription-wrapper form{max-width:500px}
+}.subscription-wrapper .indicates-required{font-size:14px;margin-bottom:5px}
+.subscription-wrapper .asterisk{color:#ec1711;font-size:18px;position:relative;top:0}
+.subscription-wrapper .mc-field-group{margin:5px 0;width:100%;float:left}
+.subscription-wrapper .mc-field-group label{display:block;width:100%;position:relative}
+@media screen and (min-width:600px){.subscription-wrapper .mc-field-group label{display:inline-block;width:32%;top:-1px;float:left}
+}.subscription-wrapper .mc-field-group input[type="email"],.subscription-wrapper .mc-field-group input[type="text"]{width:100%;height:34px;line-height:32px;padding:2px 5px;outline:0}
+@media screen and (min-width:600px){.subscription-wrapper .mc-field-group input[type="email"],.subscription-wrapper .mc-field-group input[type="text"]{width:68%;float:left}
+}.subscription-wrapper .mc-field-group input[type="email"]:focus,.subscription-wrapper .mc-field-group input[type="text"]:focus{border:1px solid #ef7d40;box-shadow:0 0 7px 0 rgba(0,0,0,0.32)}
+.subscription-wrapper .mc-field-group input[type="email"].mce_inline_error,.subscription-wrapper .mc-field-group input[type="text"].mce_inline_error{border:1px solid #ec1711}
+.subscription-wrapper .mc-field-group.input-group ul{display:block;width:100%;margin:0;padding:0;list-style:none}
+@media screen and (min-width:600px){.subscription-wrapper .mc-field-group.input-group ul{display:inline-block;width:68%;float:left}
+}.subscription-wrapper .mc-field-group.input-group ul li{display:inline-block;float:left;position:relative;padding-left:21px;margin-right:25px}
+.subscription-wrapper .mc-field-group.input-group ul li input[type="radio"]{position:absolute;top:3px;left:0;margin:0}
+.subscription-wrapper input[type="submit"]{-webkit-appearance:none;border:0;box-shadow:none;text-shadow:none;background:#ef7d40;color:#FFF;font-size:15px;font-weight:bold;line-height:1.2;text-transform:uppercase;padding:10px 20px;margin-top:20px;margin-bottom:10px;box-sizing:border-box;width:100%;text-align:center;border-radius:5px;-webkit-transition:all ease-out .3s;transition:all ease-out .3s}
+.subscription-wrapper input[type="submit"]:hover{background:#ef9b40}
+.subscription-wrapper div.mce_inline_error{display:block;width:100%;float:left;font-size:13px;text-align:center;color:#ec1711}
+@media screen and (min-width:600px){.subscription-wrapper div.mce_inline_error{width:68%;float:right}
+}.blog .format-aside .entry-title,.archive .format-aside .entry-title{display:none}
 .comment-content a{word-wrap:break-word}
 .bypostauthor{display:block}
 .infinite-scroll .posts-navigation,.infinite-scroll.neverending .site-footer{display:none}

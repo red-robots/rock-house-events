@@ -662,4 +662,128 @@ a.buyTicketBtn i {
 	}
 }
 
+.subscription-wrapper {
+	margin-top: 40px;
+	margin-bottom: 70px;
+	form {
+		border: 1px solid $color-orange;
+		border-top-width: 5px;
+		display: block;
+		max-width: 100%;
+		width: 100%;
+		padding: 15px;
+		box-sizing: border-box;
+		@media screen and (min-width: $tabwidth) {
+			max-width: 500px;
+		}
+	}
+	.indicates-required {
+		font-size: 14px;
+		margin-bottom: 5px;
+	}
+	.asterisk {
+		color: $color-red;
+		font-size: 18px;
+		position: relative;
+		top: 0px;
+	}
+	.mc-field-group {
+		margin: 5px 0;
+		width: 100%;
+		float: left;
+	}
+	.mc-field-group label {
+		display: block;
+		width: 100%;
+		position: relative;
+		@media screen and (min-width: $tabwidth) {
+			display: inline-block;
+			width: 32%;
+			top: -1px;
+			float: left;
+		}
+	}
+	.mc-field-group input[type="email"],
+	.mc-field-group input[type="text"] {
+		width: 100%;
+		height: 34px;
+		line-height: 32px;
+		padding: 2px 5px;
+		outline: none;
+		@media screen and (min-width: $tabwidth) {
+			width: 68%;
+			float: left;
+		}
+		&:focus {
+			border: 1px solid $color-orange;
+			box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.32);
+		}
+		&.mce_inline_error {
+			border: 1px solid $color-red;
+		}
+	}
+	.mc-field-group.input-group {
+		ul {
+			display: block;
+			width: 100%;
+			margin: 0 0;
+			padding: 0 0;
+			list-style: none;
+			@media screen and (min-width: $tabwidth) {
+				display: inline-block;
+				width: 68%;
+				float: left;
+			}
+			li {
+				display: inline-block;
+				float: left;
+				position: relative;
+				padding-left: 21px;
+				margin-right: 25px;
+				input[type="radio"] {
+					position: absolute;
+					top: 3px;
+					left: 0;
+					margin: 0 0;
+				}
+			}
+		}
+	}
+	input[type="submit"] {
+		-webkit-appearance: none;
+		border: none;
+		box-shadow: none;
+		text-shadow: none;
+		background: $color-orange;
+		color: #FFF;
+		font-size: 15px;
+		font-weight: bold;
+		line-height: 1.2;
+		text-transform: uppercase;
+    	padding: 10px 20px;
+    	margin-top: 20px;
+    	margin-bottom: 10px;
+    	box-sizing: border-box;
+    	width: 100%;
+    	text-align: center;
+    	border-radius: 5px;
+    	@include transition(all ease-out .3s);
+    	&:hover {
+    		background: $color-light-orange;
+    	}
+	}
+	div.mce_inline_error {
+		display: block;
+		width: 100%;
+		float: left;
+		font-size: 13px;
+    	text-align: center;
+    	color: $color-red;
+    	@media screen and (min-width: $tabwidth) {
+			width: 68%;
+			float: right;
+		}
+	}
+}
+
 
