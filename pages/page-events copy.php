@@ -1,7 +1,5 @@
 <?php
-/**
- * Template Name: Events
- */
+
 
 $home_page_id = get_home_page_id();
 $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
@@ -59,16 +57,6 @@ get_header(); ?>
 							$event_name = get_the_title($pid);
 							$start_date = get_field('start_date',$pid);
 							$end_date = get_field('end_date',$pid);
-
-							if($start_date){
-								$date = DateTime::createFromFormat('m/d/Y', $start_date);
-								$start_date = $date->format('m/d/y');
-							}
-							if($end_date){
-								$ee_date = DateTime::createFromFormat('m/d/Y', $end_date);
-								$end_date = $ee_date->format('m/d/y');
-							}
-
 							$short_description = get_field('event_short_description',$pid);
 							$event_dates_arr = array($start_date,$end_date);
 							$event_dates_arr = ($event_dates_arr && array_filter($event_dates_arr)) ? array_unique($event_dates_arr) : '';
@@ -126,7 +114,7 @@ get_header(); ?>
 
 
 		<?php  
-		$max_items = 3;
+		$max_items = 12;
 		$old_events = get_old_events_list($max_items,$feat_id);
 		$past_paged = ( get_query_var( 'pastpg' ) ) ? absint( get_query_var( 'pastpg' ) ) : 1;
 		$events_old_all = get_old_events_list(-1, $feat_id);
@@ -148,16 +136,6 @@ get_header(); ?>
 						$event_name = $ov->post_title;
 						$start_date = get_field('start_date',$pid);
 						$end_date = get_field('end_date',$pid);
-
-						if($start_date){
-							$date = DateTime::createFromFormat('m/d/Y', $start_date);
-							$start_date = $date->format('m/d/y');
-						}
-						if($end_date){
-							$ee_date = DateTime::createFromFormat('m/d/Y', $end_date);
-							$end_date = $ee_date->format('m/d/y');
-						}
-			
 						$short_description = get_field('event_short_description',$pid);
 						$event_dates_arr = array($start_date,$end_date);
 						$event_dates_arr = ($event_dates_arr && array_filter($event_dates_arr)) ? array_unique($event_dates_arr) : '';
@@ -178,6 +156,25 @@ get_header(); ?>
 							</div>
 						</div>
 					<?php } ?>
+				</div>
+
+				<div id="old_events_pagination" class="pagination">
+					<?php
+					$old_limit = $max_items;
+					$old_total = count($events_old_all);
+	  				$page_num_items = ceil($old_total/$old_limit);
+				    $pagination = array(
+				        'base' => @add_query_arg('pastpg','%#%'),
+				        'format' => '?paged=%#%',
+				        'mid-size' => 1,
+				        'current' => $past_paged,
+				        'total' => $page_num_items,
+				        'prev_next' => True,
+				        'prev_text' => __( '<span class="fa fa-arrow-left"></span>' ),
+				        'next_text' => __( '<span class="fa fa-arrow-right"></span>' )
+				    );
+				    echo paginate_links($pagination);
+					?>
 				</div>
 			</div>
 

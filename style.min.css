@@ -1986,7 +1986,8 @@ a.buyTicketBtn i{display:block;background:url("images/Buy-Ticket.jpg") center no
 .subscription-wrapper input[type="submit"]:hover{background:#ef9b40}
 .subscription-wrapper div.mce_inline_error{display:block;width:100%;float:left;font-size:13px;text-align:center;color:#ec1711}
 @media screen and (min-width:600px){.subscription-wrapper div.mce_inline_error{width:68%;float:right}
-}.blog .format-aside .entry-title,.archive .format-aside .entry-title{display:none}
+}.event-date-info{color:#ef7d40;font-size:18px;font-weight:700;margin-bottom:10px}
+.blog .format-aside .entry-title,.archive .format-aside .entry-title{display:none}
 .comment-content a{word-wrap:break-word}
 .bypostauthor{display:block}
 .infinite-scroll .posts-navigation,.infinite-scroll.neverending .site-footer{display:none}

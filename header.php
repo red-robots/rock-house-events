@@ -21,6 +21,7 @@
 <script defer src="<?php bloginfo( 'template_url' ); ?>/assets/svg-with-js/js/fontawesome-all.js"></script>
 <script type="text/javascript">var currentPage = '<?php echo get_permalink();?>';</script>
 <?php wp_head(); ?>
+<?php get_new_featured_event(); ?>
 </head>
 
 <body <?php body_class(); ?>>

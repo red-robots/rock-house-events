@@ -383,13 +383,11 @@ function get_instagram_setup() {
     return $option;
 }
 
-function get_home_page_id() {
-    return 2; /* Homepage ID */
-}
-
 function get_upcoming_events_list($limit=6,$excludeId=null) {
   global $wpdb;
-  $date_today = date('Ymd');
+  $wp_current_time = current_time( 'timestamp', 1 );
+  //$date_today = date('Ymd');
+  $date_today = date('Ymd',$wp_current_time);
   $date_now = strtotime($date_today);
   $records = array();
   $records_limit = array();
@@ -477,7 +475,9 @@ function get_all_events($limit=6,$excludeId=null,$pageNum=1) {
 
 function get_old_events_list($limit=6,$excludeId=null) {
   global $wpdb;
-  $date_today = date('Ymd');
+  $wp_current_time = current_time( 'timestamp', 1 );
+  $date_today = date('Ymd',$wp_current_time);
+  //$date_today = date('Ymd');
   $date_now = strtotime($date_today);
   $records = array();
   $records_limit = array();
@@ -560,7 +560,39 @@ function get_all_old_events($limit=6,$excludeId=null,$pageNum=1) {
   }
 
   return $final_records;
+}
 
+/* on "featured event", if event has past, 
+default to next event (in the case a featured event falls off 
+and new one not selected) */
+if ( is_admin() ) {
+  get_new_featured_event();
+} 
+
+function get_new_featured_event() {
+  $home_page_id = get_home_page_id();
+  $featured = get_field('featured_event',$home_page_id);
+  $wp_current_time = current_time( 'timestamp', 1 );
+  $date_today = date('Ymd',$wp_current_time);
+  $date_now = strtotime($date_today);
+  if($featured){
+    $post_id = $featured->ID;
+    $s_date = get_field('start_date',$post_id);
+    $e_date = get_field('end_date',$post_id);
+    if($s_date) {
+      $end_date = (empty($e_date)) ? $s_date : $e_date;
+      $start_date = ($s_date) ? strtotime($s_date) : '';
+      $end_date = ($end_date) ? strtotime($end_date) : '';
+      if( $start_date<$date_now || $end_date<$date_now ) {
+        $upcoming_events = get_upcoming_events_list(1, $post_id);
+        if($upcoming_events){
+          $next_post_id = $upcoming_events[0]->ID;
+          /* Update featured event field */
+          update_field('featured_event', $next_post_id, $home_page_id); 
+        }
+      }
+    }
+  }
 }
 
 function my_custom_admin_styles() { ?>
@@ -574,5 +606,8 @@ function my_custom_admin_styles() { ?>
 }
 add_action( 'admin_head', 'my_custom_admin_styles' );
 
+function get_home_page_id() {
+    return 2; /* Homepage ID */
+}
 
 

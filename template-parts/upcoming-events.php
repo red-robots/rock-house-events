@@ -51,6 +51,14 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 			$event_name = get_the_title($pid);
 			$start_date = get_field('start_date',$pid);
 			$end_date = get_field('end_date',$pid);
+			if($start_date){
+				$date = DateTime::createFromFormat('m/d/Y', $start_date);
+				$start_date = $date->format('m/d/y');
+			}
+			if($end_date){
+				$ee_date = DateTime::createFromFormat('m/d/Y', $end_date);
+				$end_date = $ee_date->format('m/d/y');
+			}
 			$short_description = get_field('event_short_description',$pid);
 			$event_dates_arr = array($start_date,$end_date);
 			$event_dates_arr = ($event_dates_arr && array_filter($event_dates_arr)) ? array_unique($event_dates_arr) : '';
