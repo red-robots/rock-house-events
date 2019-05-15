@@ -4,29 +4,6 @@ $featured_event = get_field('featured_event',$home_page_id);
 $max_post = 6;
 $feat_id = ($featured_event) ? $featured_event->ID:0;
 $events = get_upcoming_events_list($max_post,$feat_id);
-
-// $args = array(
-// 	'posts_per_page'   => $max_post,
-// 	'post_type'        => 'events',
-// 	'post_status'      => 'publish',
-// 	'meta_key'		=> 'start_date',
-// 	'orderby'	=> 'meta_value_num',
-// 	'order' => 'ASC',
-// 	'meta_query' => array(
-//         array(
-//             'key' => 'event_status',
-//             'value' => 'active'
-//         ),
-//     )
-// );
-
-// if($featured_event) {
-// 	$featured_event_id = $featured_event->ID;
-// 	$args['post__not_in'] = array($featured_event_id);
-// }
-// $eventsPost = get_posts($args);
-// $events = new WP_Query($args); 
-
 $total_events = ($events) ? count($events) : 0; 
 $blank_items = 0;
 if($total_events>0) {
@@ -38,6 +15,7 @@ if($total_events>0) {
 }
 
 $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
+$days = array('Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday','Friday', 'Saturday');
 ?>
 <div class="upcoming-events-list">
 	<div class="flexrow clear">
@@ -51,19 +29,28 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 			$event_name = get_the_title($pid);
 			$start_date = get_field('start_date',$pid);
 			$end_date = get_field('end_date',$pid);
+			$start_dayofweek = '';
+			$end_dayofweek = '';
 			if($start_date){
 				$date = DateTime::createFromFormat('m/d/Y', $start_date);
 				$start_date = $date->format('m/d/y');
+				$nthDay = date('w', strtotime($start_date));
+				$start_dayofweek = $days[$nthDay];
 			}
 			if($end_date){
 				$ee_date = DateTime::createFromFormat('m/d/Y', $end_date);
 				$end_date = $ee_date->format('m/d/y');
+				$enthDay = date('w', strtotime($end_date));
+				$end_dayofweek = $days[$enthDay];
 			}
 			$short_description = get_field('event_short_description',$pid);
 			$event_dates_arr = array($start_date,$end_date);
 			$event_dates_arr = ($event_dates_arr && array_filter($event_dates_arr)) ? array_unique($event_dates_arr) : '';
 			$event_dates = ($event_dates_arr) ? implode(" - ",array_filter($event_dates_arr)) : '';
-			?>
+			$dateCount = 0;
+			if( $event_dates_arr && array_filter($event_dates_arr) ){
+				$dateCount = count( array_filter($event_dates_arr) );
+			}?>
 			<div id="eventinfo_<?php echo $j;?>" class="flexcol eventInfo">
 				<div class="imagediv" style="background-image:url('<?php echo $imageSrc;?>');">
 					<img class="feat-img" src="<?php echo $imageSrc;?>" alt="<?php echo $event_name ?>" />
@@ -72,7 +59,14 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 							<span class="txtwrap">
 								<span class="event_name"><?php echo $event_name ?></span>
 								<?php if ($event_dates) { ?>
-								<span class="start_date"><?php echo $event_dates ?></span>
+									<?php if ($dateCount>1) { ?>
+										<span class="start_date"><?php echo $event_dates ?></span>
+									<?php } else { ?>
+										<span class="start_date">
+											<span class="dayofweek"><?php echo $start_dayofweek ?></span>
+											<?php echo $event_dates ?>
+										</span>
+									<?php } ?>
 								<?php } ?>
 							</span>
 						</span>

@@ -172,6 +172,12 @@
 			display: block;
 			width: 100%;
 		}
+		span.start_date {
+			margin-top: 4px;
+		}
+		span.dayofweek {
+			font-size: 13px;
+		}
 		* {
 			@include transition(all ease .3s);
 		}
@@ -791,4 +797,16 @@ a.buyTicketBtn i {
 	font-weight: 700;
 	margin-bottom: 10px;
 }
-
+.previous-event {
+	.start_date {
+		margin-top: 4px;
+	}
+	.start_date, .start_date span {
+		display: block;
+		text-transform: uppercase;
+		line-height: 1.1;
+	}
+	.dayofweek {
+		font-size: 13px;
+	}
+}
