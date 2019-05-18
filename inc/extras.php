@@ -242,22 +242,22 @@ function generate_sitemap($menuName=null,$sortbyMenu=null) {
   
 }
 
-function get_menu_data($menuName,$object_id) {
-    $data = '';
-    if($menuName && $object_id) {
-        $menu_items = wp_get_nav_menu_items($menuName);
-        if($menu_items) {
-            foreach($menu_items as $m) {
-                $o_id = $m->object_id;
-                if($o_id==$object_id) {
-                    $data = $m;
-                    break;
-                }
-            }
+function get_menu_object( $menuId, $menuName ) {
+  $obj = '';
+  if( $menuId && $menuName ) {
+    if( $menus = wp_get_nav_menu_items($menuName) ) {
+      foreach( $menus as $m ) {
+        $id = $m->ID;
+        if( $menuId==$id ) {
+          $obj = $m;
+          break;
         }
+      }
     }
-    return $data;
+  }
+  return $obj;
 }
+
 
 function title_formatter($string) {
     if($string) {
