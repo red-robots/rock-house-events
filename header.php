@@ -46,17 +46,16 @@
 
 			<div class="flexrow clear">
 				<div class="leftcol">
-				<?php if( get_custom_logo() ) { ?>
+				<?php if( $logo = get_field('site_logo','option') ) { ?>
 					<?php if ( is_home() ) { ?>
 						<h1 class="logo">
-			            	<?php the_custom_logo(); ?>
+			            	<a href="<?php echo get_site_url(); ?>"><img src="<?php echo $logo['url'] ?>" alt="<?php echo get_bloginfo('name') ?>"></a>
 			            </h1>
 					<?php } else { ?>
 						<div class="logo">
-			            	<?php the_custom_logo(); ?>
+			            	<a href="<?php echo get_site_url(); ?>"><img src="<?php echo $logo['url'] ?>" alt="<?php echo get_bloginfo('name') ?>"></a>
 			            </div>
 					<?php } ?>
-		            
 		        <?php } else { ?>
 		            <h1 class="logo">
 			            <a href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); ?></a>
