@@ -16,41 +16,41 @@ get_header(); ?>
 			<?php } ?>
 		<?php endwhile; ?>
 
-		<div class="flexrow sectioncols clear">
+		<?php
+		$max_items = 6;
+		$featured_event = get_field('featured_event',$home_page_id);  
+		$feat_id = ($featured_event) ? $featured_event->ID:0;
+		$events = get_upcoming_events_list($max_items,$feat_id);
 
-			<?php
-			$max_items = 6;
-			$featured_event = get_field('featured_event',$home_page_id);  
-			$feat_id = ($featured_event) ? $featured_event->ID:0;
-			$events = get_upcoming_events_list($max_items,$feat_id);
-			?>
+		$paged = ( get_query_var( 'pg' ) ) ? absint( get_query_var( 'pg' ) ) : 1;
+		$events_all = get_upcoming_events_list(-1, $feat_id);
+		if($paged>1){
+			$events = get_all_events($max_items,$feat_id,$paged);
+		}
+		?>
 
-			<?php if ($featured_event) { 
-			$pid = $featured_event->ID;
-			$pagelink = get_permalink($pid);
-			$thumb_id = get_post_thumbnail_id($pid);
-			$featImg = wp_get_attachment_image_src($thumb_id,'large'); ?>
-			<div class="event-page-section featured-event-section flexcol">
-				<div class="innerpad clear">
-					<div class="titlediv"><h2>Featured Event</h2></div>
-					<a class="imagewrap" href="<?php echo $pagelink ?>"><img src="<?php echo $featImg[0] ?>" alt="<?php echo $featured_event->post_title; ?>"></a>
+		<div class="content-wrap-events page-events-info clear">
+			<div class="eventSectionTitle title1">Featured Event</div>
+			<div class="eventSectionTitle title2">Upcoming Events</div>
+
+			<div class="events-column-content clear">
+				<div class="featured-event">
+					<?php if ($featured_event) { 
+						$pid = $featured_event->ID;
+						$pagelink = get_permalink($pid);
+						$thumb_id = get_post_thumbnail_id($pid);
+						$featImg = wp_get_attachment_image_src($thumb_id,'large');
+						if($featImg) { ?>
+						<a class="imagewrap" href="<?php echo $pagelink ?>"><img src="<?php echo $featImg[0] ?>" alt="<?php echo $featured_event->post_title; ?>"></a>
+						<?php } ?>
+					<?php } ?>
 				</div>
-			</div>
-			<?php } ?>
-
-			<?php 
-			$paged = ( get_query_var( 'pg' ) ) ? absint( get_query_var( 'pg' ) ) : 1;
-			$events_all = get_upcoming_events_list(-1, $feat_id);
-			if($paged>1){
-				$events = get_all_events($max_items,$feat_id,$paged);
-			}
-
-			$j=1;  if ( $events ) {  ?>
-			<div id="upcoming_events_list" class="event-page-section upcoming-events-list flexcol">
-				<div id="innerpad_content" class="innerpad clear">
-					<div class="titlediv"><h2>Upcoming Events</h2></div>
-					<div class="flexrow event-rows clear">
-						<?php foreach($events as $row) { 
+				<div class="eventSectionTitle hide-desktop">Upcoming Events</div>
+				<div class="upcoming-events">
+					<?php if ( $events ) {  ?>
+					<div id="upcoming_events_list" class="upcoming-events-list">
+						<div class="innerpad_content clear">
+						<?php $j=1; foreach($events as $row) { 
 							$pid = $row->ID;
 							$pagelink = get_permalink($pid);
 							$thumb_id = get_post_thumbnail_id($pid);
@@ -73,7 +73,6 @@ get_header(); ?>
 								$enthDay = date('w', strtotime($end_date));
 								$end_dayofweek = $days[$enthDay];
 							}
-
 							$short_description = get_field('event_short_description',$pid);
 							$event_dates_arr = array($start_date,$end_date);
 							$event_dates_arr = ($event_dates_arr && array_filter($event_dates_arr)) ? array_unique($event_dates_arr) : '';
@@ -81,8 +80,7 @@ get_header(); ?>
 							$dateCount = 0;
 							if( $event_dates_arr && array_filter($event_dates_arr) ){
 								$dateCount = count( array_filter($event_dates_arr) );
-							}
-							?>
+							}?>
 							<div id="eventinfo_<?php echo $j;?>" class="flexcol eventInfo">
 								<div class="imagediv" style="background-image:url('<?php echo $imageSrc;?>');">
 									<img class="feat-img" src="<?php echo $imageSrc;?>" alt="<?php echo $event_name ?>" />
@@ -113,35 +111,38 @@ get_header(); ?>
 								</div>
 							</div>
 						<?php $j++; } ?>
+						</div>
 					</div>
-					<div id="events_pagination" class="pagination">
-						<?php
-						if($events_all) {
-							$limit = $max_items;
-							$total = count($events_all);
-			  				$page_num_items = ceil($total/$limit);
-						    $pagination = array(
-						        'base' => @add_query_arg('pg','%#%'),
-						        'format' => '?paged=%#%',
-						        'mid-size' => 1,
-						        'current' => $paged,
-						        'total' => $page_num_items,
-						        'prev_next' => True,
-						        'prev_text' => __( '<span class="fa fa-arrow-left"></span>' ),
-						        'next_text' => __( '<span class="fa fa-arrow-right"></span>' )
-						    );
-						    echo paginate_links($pagination);
-						}
-						?>
-					</div>
+				<?php } ?>
 				</div>
 			</div>
-			<?php } ?>
-
+			<div id="events_pagination" class="pagination eventspagi">
+				<div class="pageinner clear">
+				<?php
+				if($events_all) {
+					$limit = $max_items;
+					$total = count($events_all);
+	  				$page_num_items = ceil($total/$limit);
+				    $pagination = array(
+				        'base' => @add_query_arg('pg','%#%'),
+				        'format' => '?paged=%#%',
+				        'mid-size' => 1,
+				        'current' => $paged,
+				        'total' => $page_num_items,
+				        'prev_next' => True,
+				        'prev_text' => __( '<span class="fa fa-arrow-left"></span>' ),
+				        'next_text' => __( '<span class="fa fa-arrow-right"></span>' )
+				    );
+				    echo paginate_links($pagination);
+				}
+				?>
+				</div>
+			</div>
 		</div>
 
 
 		<?php  
+		/* PAST EVENTS */
 		$max_items = 3;
 		$old_events = get_old_events_list($max_items,$feat_id);
 		$past_paged = ( get_query_var( 'pastpg' ) ) ? absint( get_query_var( 'pastpg' ) ) : 1;

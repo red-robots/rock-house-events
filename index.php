@@ -33,7 +33,7 @@ get_header(); ?>
 	?>
 	<div class="content-wrap-events clear">
 		<div class="flexrow clear">
-			<div class="flexcol featured-event js-blocks">
+			<div class="flexcol featured-event">
 				<div class="blackdiv"><span aria-label="true" class="eventSectionTitle">Featured Event</span></div>
 				<?php if ($featured_event) { 
 					$pid = $featured_event->ID;
@@ -45,7 +45,7 @@ get_header(); ?>
 					<?php } ?>
 				<?php } ?>
 			</div>
-			<div class="flexcol upcoming-events js-blocks">
+			<div class="flexcol upcoming-events">
 				<div class="blackdiv"><span aria-label="true" class="eventSectionTitle">Upcoming Events</span></div>
 				<?php get_template_part('template-parts/upcoming-events'); ?>
 			</div>

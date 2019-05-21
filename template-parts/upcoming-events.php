@@ -18,8 +18,7 @@ $noImageURL = get_bloginfo('template_url').'/images/noimage.png';
 $days = array('Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday','Friday', 'Saturday');
 ?>
 <div class="upcoming-events-list">
-	<div class="flexrow clear">
-	<?php $j=0;  if ( $events ) {  ?>
+	<?php if ( $events ) {  ?>
 		<?php $j=1; foreach($events as $row) { 
 			$pid = $row->ID;
 			$pagelink = get_permalink($pid);
@@ -101,5 +100,4 @@ $days = array('Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday','Friday', 'S
 			</div>
 		<?php } ?>
 	<?php } ?>
-	</div>
 </div>

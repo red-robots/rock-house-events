@@ -70,7 +70,8 @@ jQuery(document).ready(function ($) {
 		var pagenum = res[1];
 		if(currentPage) {
 			var new_url = currentPage + '?pg=' + pagenum;
-			$("#upcoming_events_list").load( new_url + ' #innerpad_content');
+			$("#upcoming_events_list").load( new_url + ' .innerpad_content');
+			$("#events_pagination").load( new_url + ' .pageinner');
 			window.history.replaceState( null, null, new_url );
 		}
 	});

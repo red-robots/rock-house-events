@@ -23,13 +23,13 @@
 		display: block;
 	}
 	.flexrow {
-		@media screen and (min-width: $tabwidth) {
+		@media screen and (min-width: $midwidth) {
 			@include flexbox-align-items(center);
 			@include flexbox-justify(center);
 		}
 	}
 	.flexcol {
-		@media screen and (min-width: $tabwidth) {
+		@media screen and (min-width: $midwidth) {
 			width: 50%;
 			float: left;
 		}
@@ -48,6 +48,8 @@
 }
 
 .content-wrap-events {
+	position: relative;
+	overflow: hidden;
 	.blackdiv {
 		display: block;
 		background: #000;
@@ -62,6 +64,24 @@
 		width: 100%;
 		@media screen and (min-width: $midwidth) {
 			width: 50%;
+			float: left;
+		}
+	}
+	.upcoming-events {
+		@media screen and (min-width: $midwidth) {
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: 100%;
+		}
+	}
+	.upcoming-events-list {
+		@media screen and (min-width: $midwidth) {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 100%;
+			height: 100%;
 		}
 	}
 	.imagewrap {
@@ -98,6 +118,7 @@
 		width: 100%;
 		@media screen and (min-width: $tabwidth) {
 			width: 50%;
+			float: left;
 		}
 	}
 	.eventInfo {
@@ -106,9 +127,12 @@
 		height: 200px;
 		margin-bottom: 1px;
 		@media screen and (min-width: $tabwidth) {
-			min-height: 180px;
+			min-height: 230px;
 			height: 33.333%;
 			margin-bottom: 0;
+		}
+		@media screen and (min-width: $midwidth) {
+			min-height: auto;
 		}
 	}
 	.imagediv {
@@ -167,16 +191,48 @@
 		@include flexbox-direction(row);
 		@include flexbox-justify(center);
 		@include flexbox-align-content(center);
+		@include flexbox-align-items(center);
 		@include transition(all ease .3s);
 		span {
 			display: block;
 			width: 100%;
 		}
+		span.event_name {
+			font-size: 16px;
+			@media screen and (min-width: $tabwidth) {
+				font-size: 2vw;
+			}
+			@media screen and (min-width: $midwidth) {
+				font-size: 15px;
+			}
+			@media screen and (min-width: $deskwidth) {
+				font-size: 17px;
+			}
+		}
 		span.start_date {
-			margin-top: 4px;
+			margin-top: 5px;
+			font-size: 13px;
+			@media screen and (min-width: $tabwidth) {
+				font-size: 2vw;
+			}
+			@media screen and (min-width: $midwidth) {
+				font-size: 13px;
+			}
+			@media screen and (min-width: $deskwidth) {
+				font-size: 15px;
+			}
 		}
 		span.dayofweek {
-			font-size: 13px;
+			font-size: 12px;
+			@media screen and (min-width: $tabwidth) {
+				font-size: 2vw;
+			}
+			@media screen and (min-width: $midwidth) {
+				font-size: 12px;
+			}
+			@media screen and (min-width: $deskwidth) {
+				font-size: 13px;
+			}
 		}
 		* {
 			@include transition(all ease .3s);
@@ -206,6 +262,12 @@
 		color: $color__text-main;
 		transform:translateY(100%);
 		@include transition(all ease .3s);
+		@media screen and (min-width: $midwidth) {
+			font-size: 11px;
+		}
+		@media screen and (min-width: $deskwidth) {
+			font-size: 12px;
+		}
 		* {
 			@include transition(all ease .3s);
 		}
@@ -252,6 +314,74 @@
 		}
 		.eventcaption {
 			transform:translateY(0);
+		}
+	}
+}
+.events-column-content {
+	position: relative;
+	.featured-event {
+		width: 100%;
+		float: left;
+		@media screen and (min-width: $midwidth) {
+			width: 48.5%;
+			float: left;
+		}  
+	}
+	.upcoming-events {
+		width: 100%;
+		float: left;
+		@media screen and (min-width: $midwidth) {
+			width: 48.5%;
+		}  
+	}
+	.innerpad_content {
+		height: 100%;
+	}
+}
+.page-events-info {
+	.eventSectionTitle {
+		text-align: center;
+		margin-top: 0;
+		margin-bottom: 15px;
+		@media screen and (min-width: $midwidth) {
+			width: 48.5%;
+		}  
+	}
+	.eventSectionTitle.title1 {
+		@media screen and (min-width: $midwidth) {
+			float: left;
+		}  
+	}
+	.eventSectionTitle.title2 {
+		display: none;
+		@media screen and (min-width: $midwidth) {
+			display: block;
+			float: right;
+		}  
+	}
+	.eventSectionTitle.hide-desktop {
+		display: block;
+		width: 100%;
+		float: left;
+		margin-top: 15px;
+		@media screen and (min-width: $midwidth) {
+			display: none;
+		}  
+	}
+}
+body.is_safari {
+	.upcoming-events-list .flexcol {
+		width: 100%;
+		@media screen and (min-width: $tabwidth) {
+			width: 49.42%;
+		}  
+	}
+	.black-navigation {
+		.flexcol {
+			@media screen and (min-width: $midwidth) {
+				width: 49.94%;
+				float: left;
+			}
 		}
 	}
 }
@@ -501,6 +631,7 @@ a.buyTicketBtn i {
 	margin-left: -15px;
 	margin-right: -15px;
 	padding-bottom: 50px;
+	position: relative;
 }
 .event-page-section.upcoming-events-list {
 	width: 100%;
@@ -511,6 +642,12 @@ a.buyTicketBtn i {
 	.event-rows {
 		position: relative;
 		top: -2px;
+		@media screen and (min-width: $midwidth) {
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: 100%;
+		}
 	}
 	.eventInfo {
 		overflow: hidden;
@@ -528,16 +665,25 @@ a.buyTicketBtn i {
 		left: 0;
 	}
 }
-.pagination {
+.pagination.eventspagi {
 	margin-top: 15px;
-	text-align: right;
+	margin-bottom: 15px;
+	text-align: center;
+	@media screen and (min-width: $midwidth) {
+		text-align: right;
+	}
 	a,span {
 		display: inline-block;
 		font-size: 13px;
 		line-height: 1.2;
 		text-decoration: none;
-		padding: 4px 6px;
+		padding: 6px 10px;
 		color: #FFF;
+		margin: 0 2px;
+		@media screen and (min-width: $midwidth) {
+			padding: 4px 6px;
+			margin: 0 0;
+		}
 	}
 	span {
 		background: $color-orange;
@@ -545,29 +691,25 @@ a.buyTicketBtn i {
 	a {
 		background: #000;
 		color: #FFF;
+		&:hover {
+			opacity: 0.5;
+		}
 	}
 }
 
 .old-events-list {
 	padding-bottom: 50px;
 	.flexrow {
-		margin-left: -15px;
-		margin-right: -15px;
+		margin-left: -10px;
+		margin-right: -10px;
+		@media screen and (min-width: $midwidth) {
+			margin-left: -15px;
+			margin-right: -15px;
+		}
 	}
 	.titlediv {
 		position: relative;
 		margin-bottom: 30px;
-		// &:before {
-		// 	content:"";
-		// 	display: block;
-		// 	width: 100%;
-		// 	height: 7px;
-		// 	background: #000;
-		// 	position: absolute;
-		// 	top: 50%;
-  // 			transform: translateY(-50%);
-  // 			left: 0;
-		// }
 	}
 	.sectiontitle {
 		margin: 0 0;
@@ -593,12 +735,14 @@ a.buyTicketBtn i {
 			width: 33.3%;
 		}
 		.inner {
-			padding-left: 15px;
-			padding-right: 15px;
+			padding-left: 10px;
+			padding-right: 10px;
 			box-sizing: border-box;
 			height: 220px;
 			overflow: hidden;
-			@media screen and (min-width: $tabwidth) {
+			@media screen and (min-width: $midwidth) {
+				padding-left: 15px;
+				padding-right: 15px;
 				height: 100%;
 			}
 		}
@@ -665,6 +809,14 @@ a.buyTicketBtn i {
 	}
 	.event_details:hover {
 		transform: scale(1.2);
+	}
+}
+
+body.is_safari .old-events-list {
+	.previous-event {
+		@media screen and (min-width: $tabwidth) {
+			width: 33.2%;
+		}
 	}
 }
 
