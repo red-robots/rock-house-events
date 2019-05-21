@@ -30,8 +30,17 @@
 	}
 	.flexcol {
 		@media screen and (min-width: $midwidth) {
-			width: 50%;
+			width: 49%;
+		}
+	}
+	.flexcol.text-left {
+		@media screen and (min-width: $midwidth) {
 			float: left;
+		}
+	}
+	.flexcol.text-right {
+		@media screen and (min-width: $midwidth) {
+			float: right;
 		}
 	}
 }
