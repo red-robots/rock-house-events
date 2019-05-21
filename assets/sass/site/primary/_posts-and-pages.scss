@@ -737,22 +737,28 @@ a.buyTicketBtn i {
 		}
 	}
 	.previous-event {
-		min-height: 220px;
+		height: 250px;
 		overflow: hidden;
-		margin-bottom: 30px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		width: 100%;
+    	float: left;
 		@media screen and (min-width: $tabwidth) {
+			height: 230px;
 			width: 33.3%;
+			float: none;
+			margin-top: 0;
+			margin-bottom: 0;
 		}
 		.inner {
 			padding-left: 10px;
 			padding-right: 10px;
 			box-sizing: border-box;
-			height: 220px;
+			height: 100%;
 			overflow: hidden;
 			@media screen and (min-width: $midwidth) {
 				padding-left: 15px;
 				padding-right: 15px;
-				height: 100%;
 			}
 		}
 	}

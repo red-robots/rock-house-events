@@ -1995,10 +1995,10 @@ a.buyTicketBtn i{display:block;background:url("images/Buy-Ticket.jpg") center no
 }.old-events-list .titlediv{position:relative;margin-bottom:30px}
 .old-events-list .sectiontitle{margin:0;position:relative;font-size:25px;font-family:"Black Han Sans",sans-serif;font-weight:normal;line-height:1.3;z-index:5;background:#000}
 .old-events-list .sectiontitle span{display:inline-block;background:#000;color:#ef7d40;padding:9px 23px 5px}
-.old-events-list .previous-event{min-height:220px;overflow:hidden;margin-bottom:30px}
-@media screen and (min-width:600px){.old-events-list .previous-event{width:33.3%}
-}.old-events-list .previous-event .inner{padding-left:10px;padding-right:10px;box-sizing:border-box;height:220px;overflow:hidden}
-@media screen and (min-width:900px){.old-events-list .previous-event .inner{padding-left:15px;padding-right:15px;height:100%}
+.old-events-list .previous-event{height:250px;overflow:hidden;margin-top:10px;margin-bottom:10px;width:100%;float:left}
+@media screen and (min-width:600px){.old-events-list .previous-event{height:230px;width:33.3%;float:none;margin-top:0;margin-bottom:0}
+}.old-events-list .previous-event .inner{padding-left:10px;padding-right:10px;box-sizing:border-box;height:100%;overflow:hidden}
+@media screen and (min-width:900px){.old-events-list .previous-event .inner{padding-left:15px;padding-right:15px}
 }.old-events-list .imagediv{background-size:cover;background-position:center;background-repeat:no-repeat;height:100%;-webkit-transition:all ease-out .3s;transition:all ease-out .3s}
 .old-events-list .event_details{display:block;width:100%;height:100%;position:relative;text-align:center;text-decoration:none;background:rgba(0,0,0,0.75);background-size:cover;background-position:center;background-repeat:no-repeat;display:-webkit-box;display:-ms-flexbox;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-flex-direction:row;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-justify-content:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-transition:all ease-out .3s;transition:all ease-out .3s}
 .old-events-list .event_details:before{content:"";display:block;width:100%;height:100%;position:absolute;top:0;left:0;background:rgba(0,0,0,0.65)}
