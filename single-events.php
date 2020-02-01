@@ -30,17 +30,28 @@ get_header(); ?>
 			$end_dayofweek = $days[$enthDay];
 		}
 
+		$startTime = get_field("event_start_time");
+		$endTime = get_field("event_end_time");
 		//echo $result    = date('Y-m-d', strtotime(($start_date - $dayofweek).' day', strtotime($start_date)));
+		$time_info = array($startTime,$endTime);
+		$eventTime = ( $time_info && array_filter($time_info) ) ?  implode(" &ndash; ", array_filter($time_info)) : '';
 
 		?>
 		<?php if ( has_post_thumbnail() ) { ?>
 		<div class="event-feat-image"><?php the_post_thumbnail('full'); ?></div>
 		<?php } ?>
 		<div class="entry-content event-information <?php echo ($featImg) ? 'half':'full';?>">
-			<?php if ($start_date) { ?>
+			<?php if ($start_date || $event_start_time) { ?>
 			<div class="event-date-info">
-				<span class="start"><?php echo $start_dayofweek . ', ' . $start_date ?></span>
-				<?php if ($end_date) { ?><span class="sep"> - </span><span class="start"><?php echo $end_dayofweek . ', ' . $end_date ?></span><?php } ?>
+				<?php if ($start_date) { ?>
+					<span class="start"><?php echo $start_dayofweek . ', ' . $start_date ?></span>
+					<?php if ($end_date) { ?><span class="sep"> &ndash; </span><span class="start"><?php echo $end_dayofweek . ', ' . $end_date ?></span><?php } ?>
+				<?php } ?>
+				
+				<?php if ($eventTime) { ?>
+					<div class="eventTime"><?php echo $eventTime ?></div>
+				<?php } ?>
+
 			</div>
 			<?php } ?>
 			<?php the_content(); ?>
